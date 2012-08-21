@@ -38,10 +38,10 @@
       #define UNITY_SUPPORT_64
       #endif
     #else
-      #define UNITY_INT_WIDTH (32)
+      #define UNITY_INT_WIDTH (16)
     #endif
   #else
-    #define UNITY_INT_WIDTH (32)
+    #define UNITY_INT_WIDTH (16)
   #endif
 #endif
 
@@ -57,13 +57,13 @@
     #elif (ULONG_MAX == 0xFFFFFFFFFFFFFFFF)
       #define UNITY_LONG_WIDTH (64)
     #else
-      #define UNITY_LONG_WIDTH (32)
+      #define UNITY_LONG_WIDTH (16)
       #ifndef UNITY_SUPPORT_64
       #define UNITY_SUPPORT_64
       #endif
     #endif
   #else
-    #define UNITY_LONG_WIDTH (32)
+    #define UNITY_LONG_WIDTH (16)
   #endif
 #endif
 
@@ -99,7 +99,7 @@
   #endif
 #endif
 #ifndef UNITY_POINTER_WIDTH
-  #define UNITY_POINTER_WIDTH (32)
+  #define UNITY_POINTER_WIDTH (16)
 #endif
 
 //-------------------------------------------------------
@@ -236,10 +236,10 @@ typedef UNITY_DOUBLE_TYPE _UD;
 
 #ifndef UNITY_OUTPUT_CHAR
 //Default to using putchar, which is defined in stdio.h above
-#define UNITY_OUTPUT_CHAR(a) putchar(a)
+#define UNITY_OUTPUT_CHAR(a,i) put_char(a,i)
 #else
 //If defined as something else, make sure we declare it here so it's ready for use
-extern int UNITY_OUTPUT_CHAR(int);
+extern int UNITY_OUTPUT_CHAR(int,int);
 #endif
 
 //-------------------------------------------------------
@@ -331,15 +331,15 @@ void UnityDefaultTestRun(UnityTestFunction Func, const char* FuncName, const int
 // Test Output
 //-------------------------------------------------------
 
-void UnityPrint(const char* string);
-void UnityPrintMask(const _U_UINT mask, const _U_UINT number);
-void UnityPrintNumberByStyle(const _U_SINT number, const UNITY_DISPLAY_STYLE_T style);
-void UnityPrintNumber(const _U_SINT number);
-void UnityPrintNumberUnsigned(const _U_UINT number);
-void UnityPrintNumberHex(const _U_UINT number, const char nibbles);
+void UnityPrint(const char* string,int index);
+void UnityPrintMask(const _U_UINT mask, const _U_UINT number,int index);
+void UnityPrintNumberByStyle(const _U_SINT number, const UNITY_DISPLAY_STYLE_T style,int index);
+void UnityPrintNumber(const _U_SINT number,int index);
+void UnityPrintNumberUnsigned(const _U_UINT number,int index);
+void UnityPrintNumberHex(const _U_UINT number, const char nibbles,int index);
 
 #ifdef UNITY_FLOAT_VERBOSE
-void UnityPrintFloat(const _UF number);
+void UnityPrintFloat(const _UF number,int index);
 #endif
 
 //-------------------------------------------------------
